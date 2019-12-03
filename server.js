@@ -4,7 +4,11 @@ var express = require('express');
 // ===============================
 
 var app = express();   
-var cors = require('cors');       
+var cors = require('cors');  
+var mongo = require('mongodb');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/";
+var options = { useUnifiedTopology: true, useNewUrlParser: true };     
 
 // #2 Add body-parser package to the app
 var bodyParser = require('body-parser');
@@ -18,12 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // #3 Serve static content in folder frontend
-app.set('view engine', 'ejs');
-
-app.get("/", function (req, res) {
-    res.render('pages/index');
-
-});
+app.use(express.static('www'));
 // ===============================
 
 
